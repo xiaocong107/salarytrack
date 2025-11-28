@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>打工薪資紀錄器 - 極簡版</title>
+    <title>打工薪資紀錄器 - 最終穩定版</title>
     <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
@@ -29,30 +29,36 @@
         </header>
 
         <section class="settings-panel" id="settingsPage">
-            <h2>個人設定</h2>
-            <div class="input-group">
-                <label for="hourlyRate">時薪 (NT$):</label>
-                <input type="number" id="hourlyRate" value="183" min="0" placeholder="設定您的時薪">
+            <h2>⚙️ 個人設定</h2>
+            
+            <div class="settings-content">
+                <div class="input-group">
+                    <label for="hourlyRate">時薪 (NT$):</label>
+                    <input type="number" id="hourlyRate" value="183" min="0" placeholder="設定您的時薪">
+                </div>
+                <div class="input-group">
+                    <label for="insuranceDeduction">勞保/其他扣款 (NT$):</label>
+                    <input type="number" id="insuranceDeduction" value="1000" min="0" placeholder="每月固定扣款金額">
+                </div>
             </div>
-            <div class="input-group">
-                <label for="insuranceDeduction">勞保/其他扣款 (NT$):</label>
-                <input type="number" id="insuranceDeduction" value="1000" min="0" placeholder="每月固定扣款金額">
-            </div>
-             <button onclick="saveCurrentMonthSummary()" class="btn-primary" style="margin-top: 15px;">儲存本月結算為歷史</button>
         </section>
 
-        <section class="history-page page-content" id="historyPage">
-            <h2>📜 歷史紀錄總覽</h2>
-            <ul id="historyList">
-                </ul>
-            <button onclick="clearAllHistory()" class="btn-clear" style="margin-top: 20px;">清除所有歷史紀錄</button>
+        <section class="history-page" id="historyPage">
+            <h2>📜 歷史結算總覽 (月曆卡片)</h2>
+            <div id="historyGrid" class="history-grid-container">
+                </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="saveMonthlySummaryBtn" class="btn-primary" style="margin-right: 10px;">儲存當前月結算</button>
+                <button id="clearHistoryBtn" class="btn-clear">清除所有歷史紀錄</button>
+            </div>
         </section>
 
 
-        <main class="calendar-section page-content active" id="calendarPage">
+        <main class="calendar-section" id="calendarPage">
+            <h2>📅 日曆與紀錄</h2>
             <div class="calendar-nav">
-                <button onclick="changeMonth(-1)" class="nav-button">&#9664; 上個月</button>
-                <button onclick="changeMonth(1)" class="nav-button">下個月 &#9654;</button>
+                <button id="prevMonthBtn" class="nav-button">&#9664; 上個月</button>
+                <button id="nextMonthBtn" class="nav-button">下個月 &#9654;</button>
             </div>
             
             <div class="weekdays">
@@ -69,35 +75,31 @@
             <div id="currentLogInfo">
                 </div>
             
-            <div class="slider-inputs">
-                <label>工時 (小時): <span id="workHoursValue">8</span></label>
-                <input type="range" id="workHoursSlider" min="0" max="12" value="8" step="1" oninput="updateTimeDisplay()">
-                
-                <label>工時 (分鐘): <span id="workMinutesValue">00</span></label>
-                <input type="range" id="workMinutesSlider" min="0" max="59" value="0" step="5" oninput="updateTimeDisplay()">
+            <div class="stepper-inputs">
+                <div class="input-group">
+                    <label for="workHoursInput">工時 (小時):</label>
+                    <input type="number" id="workHoursInput" value="0" min="0" max="12" step="1">
+                </div>
+                <div class="input-group">
+                    <label for="workMinutesInput">工時 (分鐘):</label>
+                    <input type="number" id="workMinutesInput" value="0" min="0" max="59" step="5">
+                </div>
             </div>
             
             <div class="action-buttons">
-                <button onclick="saveDailyLog('工時')" class="btn-save">儲存工時</button> 
-                <button onclick="saveDailyLog('排休')" class="btn-leave">排休</button>
-                <button onclick="saveDailyLog('請假')" class="btn-leave">請假</button>
-                <button onclick="clearDailyLog()" class="btn-clear">清除紀錄</button>
+                <button id="saveWorkBtn" class="btn-save">儲存工時</button> 
+                <button id="saveOffBtn" class="btn-leave">排休</button>
+                <button id="saveLeaveBtn" class="btn-leave">請假</button>
+                <button id="clearDayBtn" class="btn-clear">清除紀錄</button>
             </div>
         </section>
 
     </div>
 
-    <nav class="bottom-nav">
-        <button onclick="showPage('calendarPage')" class="nav-item active" id="nav-calendar">
-            <span class="nav-icon">📅</span>
-            <span class="nav-text">日曆</span>
-        </button>
-        <button onclick="showPage('settingsPage')" class="nav-item" id="nav-settings">
-            <span class="nav-icon">⚙️</span>
-            <span class="nav-text">設定</span>
-        </button>
-        <button onclick="showPage('historyPage')" class="nav-item" id="nav-history">
-            <span class="nav-icon">📜</span>
-            <span class="nav-text">歷史</span>
-        </button>
-    </nav>
+    <div id="dataStore" style="display:none;">
+        <input type="hidden" id="monthTracker">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
