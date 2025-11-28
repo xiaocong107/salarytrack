@@ -1,0 +1,305 @@
+/* 顏色變數 */
+:root {
+    --color-bg: #121212; 
+    --color-surface: #1e1e1e;
+    --color-text-primary: #e0e0e0; 
+    --color-text-secondary: #909090; 
+    --color-accent: #6200ee; 
+    --color-success: #03dac6; 
+    --color-danger: #cf6679; 
+    --color-warning: #ffcc80; 
+    --color-calculate: #f1c40f; 
+}
+
+/* 基本重置與黑色調設定 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 10px; 
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    background: var(--color-bg);
+    padding: 15px;
+    max-width: 600px; 
+    width: 100%;
+}
+
+/* 標題與卡片 */
+h1 {
+    text-align: center;
+    color: var(--color-success);
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-surface);
+    padding-bottom: 8px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.card {
+    background: var(--color-surface);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.auto-save-hint {
+    font-size: 0.8em;
+    color: var(--color-text-secondary);
+    margin-top: -10px;
+}
+
+/* 輸入欄位 */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--color-text-secondary);
+}
+
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="month"] {
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #333;
+    color: var(--color-text-primary);
+    box-sizing: border-box; 
+}
+
+/* ------------------------------------- */
+/* 拉桿工時輸入區樣式 (c04) - 極簡化樣式 */
+/* ------------------------------------- */
+
+.time-slider-inputs {
+    padding: 5px 0;
+}
+
+.time-slider-inputs label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: var(--color-text-primary);
+}
+
+/* 新增的拉桿數值顯示容器 */
+.slider-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slider-control span {
+    font-weight: bold;
+    color: var(--color-success);
+    width: 40px; /* 確保數值有足夠空間 */
+    text-align: right;
+}
+
+input[type="range"] {
+    /* 移除所有自定義外觀，使用瀏覽器原生樣式確保兼容性 */
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #444;
+    border-radius: 5px;
+    margin: 0; /* 重置 margin */
+    flex-grow: 1;
+}
+
+/* 由於我們移除了自定義拇指樣式，此處僅保留基本 */
+/* 如果在您的手機上仍然不顯示，請刪除所有 input[type="range"] 相關的 CSS */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: var(--color-accent); /* 嘗試應用顏色 */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+
+/* 按鈕樣式 (保持不變) */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold;
+    flex-grow: 1;
+    min-width: 100px; 
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: white;
+}
+.btn-secondary {
+    background-color: #3a3a3a;
+    color: var(--color-text-primary);
+}
+.btn-danger {
+    background-color: var(--color-danger);
+    color: white;
+    width: 100%;
+    margin-top: 15px;
+}
+.btn-danger-small {
+    background-color: #552d33;
+    color: var(--color-danger);
+    width: 100%;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+/* 月份切換按鈕 */
+.month-changer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.month-changer button {
+    flex-grow: 1; 
+    margin: 0 5px;
+    background-color: #3a3a3a; 
+    color: var(--color-text-primary);
+    border: 1px solid #555;
+    font-size: 12px;
+}
+
+/* 總結區 */
+.summary-output p {
+    font-size: 1em;
+    margin: 8px 0;
+    color: var(--color-text-secondary);
+}
+
+.total-salary {
+    font-weight: bold;
+    color: var(--color-success);
+    font-size: 1.8em !important;
+}
+
+/* 實領薪資結算區 */
+.final-salary-section input[type="number"] {
+    width: 100%;
+}
+
+.bold-value {
+    font-weight: bold;
+    color: var(--color-success);
+    font-size: 1.2em;
+}
+
+.btn-calculate {
+    background-color: var(--color-calculate);
+    color: #121212;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.final-result {
+    text-align: center;
+    margin-top: 20px !important;
+    border-top: 1px dashed #444;
+    padding-top: 15px;
+}
+.final-value {
+    font-weight: bold;
+    color: var(--color-calculate);
+    font-size: 2.5em;
+    display: block;
+}
+
+.btn-save-record {
+    background-color: #1a1a1a;
+    color: var(--color-accent);
+    margin-top: 10px;
+}
+
+/* 月實領紀錄清單 */
+#monthlyRecordList {
+    list-style: none;
+    padding: 0;
+}
+
+.monthly-record-item {
+    background: #2a2a2a;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border-left: 5px solid var(--color-accent);
+}
+
+.monthly-record-item .record-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1em;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #3a3a3a;
+    padding-bottom: 3px;
+}
+.monthly-record-item .date-saved {
+    font-size: 0.7em;
+    color: var(--color-text-secondary);
+}
+
+.monthly-record-item .record-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.monthly-record-item .final-net {
+    font-weight: bold;
+    color: var(--color-calculate);
+    font-size: 1.1em;
+}
+
+.no-record {
+    color: var(--color-text-secondary);
+    text-align: center;
+    padding: 10px;
+}
+
+/* 日曆總結樣式 */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 3px;
+}
+
+.calendar-day {
+    padding: 5px; 
+    min-height: 70px; 
+    background-color: #3a3a3a;
+    border: 1px solid #444;
+}
+.day-work {
+    background-color: #1a3a3a;
+}

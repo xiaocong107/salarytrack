@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打工薪資計算器</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    <div class="container">
+        <h1>🌑 打工薪資紀錄器</h1>
+        
+        <section class="card rate-section">
+            <h2>1. 基本設定</h2>
+            <label for="hourlyRate">您的時薪 (NT$):</label>
+            <input type="number" id="hourlyRate" value="183" min="0">
+            <p class="auto-save-hint">時薪已自動儲存，下次開啟會自動載入。</p>
+        </section>
+
+        <section class="card log-section">
+            <h2>2. 新增紀錄</h2>
+            <label for="logDate">日期:</label>
+            <input type="date" id="logDate">
+            
+            <div class="time-slider-inputs">
+                <label>工時 (小時):</label>
+                <div class="slider-control">
+                    <span id="workHoursValue">8</span>
+                    <input type="range" id="workHoursSlider" min="0" max="12" value="8" step="1" oninput="updateTimeDisplay()">
+                </div>
+
+                <label>工時 (分鐘):</label>
+                <div class="slider-control">
+                    <span id="workMinutesValue">00</span>
+                    <input type="range" id="workMinutesSlider" min="0" max="59" value="0" step="5" oninput="updateTimeDisplay()">
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button onclick="addSliderLog()" class="btn-primary">紀錄工時</button> 
+                <button onclick="addLeave('排休')" class="btn-secondary">排休 (不計薪)</button>
+                <button onclick="addLeave('請假')" class="btn-secondary">請假 (不計薪)</button>
+            </div>
+        </section>
+
+        <section class="card summary-section">
+            <h2>3. 月份總結</h2>
+            <div class="filter-controls">
+                <label for="monthFilter">選擇月份:</label>
+                <input type="month" id="monthFilter">
+                <div class="month-changer">
+                    <button onclick="changeMonth(-1)">&#9664; 上個月</button>
+                    <button onclick="changeMonth(1)">下個月 &#9654;</button>
+                </div>
+            </div>
+
+            <div class="summary-output">
+                <p>總工時: <span id="totalHours">0.00</span> 小時</p>
+                <p class="total-salary">應領薪資 (稅前): NT$ <span id="totalSalary">0</span></p>
+            </div>
+        </section>
+        
+        <section class="card final-salary-section">
+            <h2>4. 實領薪資結算</h2>
+            <p>本月應領總額: NT$ <span id="payableSalary" class="bold-value">0</span></p>
+
+            <label for="labourInsurance">勞保/團保扣除額 (NT$):</label>
+            <input type="number" id="labourInsurance" value="0" min="0">
+
+            <label for="healthInsurance">健保/其他扣除額 (NT$):</label>
+            <input type="number" id="healthInsurance" value="0" min="0">
+            
+            <button onclick="calculateNetSalary()" class="btn-calculate">計算實領金額</button>
+
+            <p class="final-result">實拿金額: NT$ <span id="netSalary" class="final-value">0</span></p>
+            
+            <button onclick="saveMonthlyRecord()" class="btn-save-record">儲存本月結算</button>
+        </section>
+
+        <section class="card calendar-section">
+            <h2>5. 上班日曆 (每日收入)</h2>
+            <div id="calendarDisplay" class="calendar-grid">
+                </div>
+        </section>
+
+        <section class="card monthly-record-section">
+            <h2>6. 月實領紀錄</h2>
+            <ul id="monthlyRecordList">
+                </ul>
+            <button onclick="clearMonthlyRecords()" class="btn-danger-small">清除月結算紀錄</button>
+        </section>
+
+        <section class="card list-section">
+            <h2>7. 詳細紀錄清單</h2>
+            <ul id="logList">
+                </ul>
+            <button onclick="clearLogs()" class="btn-danger">清除所有工時/請假紀錄</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script> 
+</body>
+</html>
